@@ -14,6 +14,27 @@ public class Alligator extends Actor
      */
     public void act() 
     {
-        move(1);
+       if(super.getRotation()==180) {
+           //sss
+        }
+       if(super.isAtEdge()) {
+           turn(180);
+           move(1);
+        }
+       else {
+           move(1);
+        } 
+        //checkKeys();
     }    
+    private void checkKeys() {
+        int x = getX();
+        int y = getY();
+        if(Greenfoot.isKeyDown("left")) {
+            setLocation(x-2, y);
+        }
+        if(Greenfoot.isKeyDown("right")) {
+            setLocation(x+2, y);
+        }
+    }
+        
 }
