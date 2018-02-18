@@ -1,55 +1,44 @@
 import greenfoot.*;
 /**
  * Write a description of class Animation here.
- * 
- * @author Bunyarit
- * @version 1.0
+ * Re code and change some thing to readable in v1.0  
+ *
+ * @author Bunyarit Patipol Saechan
+ * @version 1.1
+ * getdamage skip 1 frame
  */
 public class Animation
 {
     private int currentFrame;
     private int allFrames;
-    private String nameSprite;
-    private GreenfootImage[] sprites;
-    private boolean[] isRight; 
-    public Animation(String name, int allFrames, int width, int height){
+    private GreenfootImage[] images;
+    public Animation(String name, int allFrames, int width, int height) {
         this.allFrames = allFrames;
-        nameSprite = name;
-        sprites = new GreenfootImage[allFrames];
-        isRight = new boolean[allFrames];
-        for(int i = 0; i < allFrames; ++i) isRight[i] = true;
-        currentFrame = -1;
-        for(int i = 1; i <= allFrames; ++i){
-          sprites[i-1] = new GreenfootImage(name+i+".png");
-          sprites[i-1].scale(width, height);
+        images = new GreenfootImage[allFrames];
+        currentFrame = 1;
+        for(int i = 1; i <= allFrames; ++i) { 
+          images[i-1] = new GreenfootImage(name+i+".png");
+          images[i-1].scale(width, height);
         }
     }
     
-    public void nextFrame(){
+    public void nextFrame() {
         currentFrame++;
-        if(currentFrame == allFrames ) currentFrame = 0;
+        if(currentFrame == allFrames ) {
+            currentFrame = 1;
+        }
     }
     
-    public GreenfootImage getFrame(){
+    public GreenfootImage getFrame() {
       nextFrame();
-      return sprites[currentFrame];
+      return images[currentFrame];
     }
     
-    public GreenfootImage getFrame(boolean isRight){
-      nextFrame();
-      if( isRight != this.isRight[currentFrame] ){
-          sprites[currentFrame].mirrorHorizontally();
-          this.isRight[currentFrame] = isRight;
-          return sprites[currentFrame];
-      }
-      return sprites[currentFrame];
-    }
-    
-    public int getAllFrames(){
+    public int getAllFrames() {
       return allFrames;
     }
     
-    public int getCurrentFrame(){
+    public int getCurrentFrame() {
       return currentFrame;
     }
 }
