@@ -29,6 +29,13 @@ public class Animation
         }
     }
     
+    public void nextFrame(int n) {
+        currentFrame+=n;
+        if(currentFrame == allFrames ) {
+            currentFrame = 1;
+        }
+    }
+    
     public GreenfootImage getFrame() {
       nextFrame();
       return images[currentFrame];
@@ -40,5 +47,17 @@ public class Animation
     
     public int getCurrentFrame() {
       return currentFrame;
+    }
+    
+    public GreenfootImage getDamage(int time) {
+        if(time>0) {
+            nextFrame(1);
+            time--;
+            return images[currentFrame];
+        }
+        else {
+            nextFrame();
+            return images[currentFrame];
+        }
     }
 }

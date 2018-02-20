@@ -1,5 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
+import java.util.List;
 /**
  * Write a description of class Rock here.
  * 
@@ -10,46 +10,42 @@ public class Rock extends Actor
 {
     private int speed = 5;
     private int count = 0;
-    private int damage = 0;
+    Flamigo nok = new Flamigo();
+    int x = 0;
+    int y = 0;
+    int i=0;
     /**
      * Act - do whatever the Rock wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act() 
     {
-        // Add your action code here.
         moveLeft();
+        x = ((Flamigo) getWorld().getObjects(Flamigo.class).get(0)).getX();
+        y = ((Flamigo) getWorld().getObjects(Flamigo.class).get(0)).getY();
+        checkSpawn(getX() < -25);
     } 
     
     private void moveLeft() {
         setLocation(getX()-speed, getY());
-        if(onTop()) {
-           count++; 
-           System.out.println("p"+count);
-        }
-        if(damage()) {
+        /*if(damage()) {
             damage++;
             System.out.println("np"+damage);
-        }
+        }*/
         if(count == 10) {
             speed++;
             count = 0 ;
         }
     }
     
-    private void CheckSpawn(boolean edge) {
-        if(edge) {
-            
-        }
+    private void checkSpawn(boolean edge) {
+       if(edge) {
+           getWorld().addObject( new Rock(), 600, 307 );
+           getWorld().removeObject(this);
+       }
+       else {
+           
+       } 
     }
-    
-    private boolean onTop() {
-        Actor up = getOneObjectAtOffset (0, -100, Flamigo.class);
-        return up != null;
-    }
-    
-    private boolean damage() {
-        Actor up = getOneObjectAtOffset (30, -45, Flamigo.class);
-        return up != null;
-    }
+ 
 }

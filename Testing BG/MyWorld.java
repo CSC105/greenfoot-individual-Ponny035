@@ -16,12 +16,21 @@ public class MyWorld extends World
      * Constructor for objects of class MyWorld.
      * 
      */
+    private GreenfootSound soundTrack;
     public MyWorld()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(600, 400, 1);
+        super(600, 400, 1, false);
+        soundTrack = new GreenfootSound( "Soft Kitty.wav" );
+        soundTrack.playLoop();
         addObject( new Flamigo(), 84, 294 );
         addObject( new Rock(), 532, 307 );
+        addObject( new Health(12), 46, 39 );
+        addObject( new Health(24), 76, 39 );
+        addObject( new Health(36), 106, 39 );
+        addObject( new Health(48), 136, 39 );
+        addObject( new Health(60), 166, 39 );
+        addObject( new Red_Algae(), 700, 296 );
         addObject( new Ground(), 60, 390 );
         addObject( new Ground(), 200, 390 );
         addObject( new Ground(), 340, 390 );
