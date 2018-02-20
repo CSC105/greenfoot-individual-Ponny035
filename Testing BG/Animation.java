@@ -5,7 +5,7 @@ import greenfoot.*;
  *
  * @author Bunyarit Patipol Saechan
  * @version 1.1
- * getdamage skip 1 frame
+ * getdamage shink 50% next frame
  */
 public class Animation
 {

@@ -1,5 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
+import java.util.*;
 /**
  * Write a description of class Flamigo here.
  * 
@@ -34,13 +34,15 @@ public class Flamigo extends Actor
         // Add your action code here.
         checkKeys();
         checkFall();
+        checkEat(((Red_Algae) getWorld().getObjects(Red_Algae.class).get(0)).getX(), ((Red_Algae) getWorld().getObjects(Red_Algae.class).get(0)).getY());
         checkDamage(((Rock) getWorld().getObjects(Rock.class).get(0)).getX(), ((Rock) getWorld().getObjects(Rock.class).get(0)).getY());
         checkDead(Health);
+        Greenfoot.delay(2);
         //setImage(anime.getDamage(5));
         //Greenfoot.playSound("Soft Kitty.wav");
     } 
     public void checkDead(int HP) {
-        if(HP>0) {
+        if(HP>12) {
           setImage(anime.getFrame());  
         }
         else {
@@ -53,6 +55,20 @@ public class Flamigo extends Actor
         int myY = getY();
         if((Math.abs(x-myX)<=29)&&(Math.abs(y-myY)<=29)) {
            Health--;
+           count++;
+        }
+    }
+    
+    private void checkEat(int x, int y) {
+        int myX = getX();
+        int myY = getY();
+        if((Math.abs(x-myX)<=29)&&(Math.abs(y-myY)<=29)) {
+           getWorld().removeObjects( (Collection)getWorld().getObjects(Red_Algae.class) );
+           getWorld().addObject( new Red_Algae(), 750, 296 );
+           Health+=12;
+           if(Health>60) {
+               Health = 60;
+           }
            count++;
         }
     }

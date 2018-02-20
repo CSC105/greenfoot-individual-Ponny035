@@ -28,10 +28,6 @@ public class Rock extends Actor
     
     private void moveLeft() {
         setLocation(getX()-speed, getY());
-        /*if(damage()) {
-            damage++;
-            System.out.println("np"+damage);
-        }*/
         if(count == 10) {
             speed++;
             count = 0 ;

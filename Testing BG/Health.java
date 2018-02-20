@@ -35,10 +35,15 @@ public class Health extends Actor
     //(Rock) getWorld().getObjects(Rock.class).get(0)).getX()
     public void checkHP (int health,int hp) {
         System.out.println(hp);
-        if(hp< health) {
+        if(health > hp) {
             image = new GreenfootImage("heart2.png");
             image.scale(25,25);
             setImage( image );
+        }
+        else if (hp >(health-12)) {
+           image = new GreenfootImage("heart1.png");
+            image.scale(25,25);
+            setImage( image ); 
         }
     }
 }
