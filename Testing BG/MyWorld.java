@@ -36,5 +36,6 @@ public class MyWorld extends World
         addObject( new Ground(), 340, 390 );
         addObject( new Ground(), 480, 390 );
         addObject( new Ground(), 620, 390 );
+        addObject( new Red_Algae(), 700, 296 );
     }
 }
