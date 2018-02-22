@@ -14,7 +14,7 @@ public class Health extends Actor
      */
     private GreenfootImage image;
     private int health;
-    int HP; // flamigo health
+    int HP; // flamingo health
     
     public Health(int health){
       image = new GreenfootImage("heart1.png");
@@ -27,7 +27,7 @@ public class Health extends Actor
     
     public void act() 
     {
-        HP = getWorld().getObjects(Flamigo.class).get(0).getHP();
+        HP = getWorld().getObjects(Flamingo.class).get(0).getHP();
         checkHP(health,HP);
         // Add your action code here.
         //setImage(anime.getFrame()); 

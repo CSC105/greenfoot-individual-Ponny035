@@ -21,9 +21,9 @@ public class MyWorld extends World
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 400, 1, false);
-        soundTrack = new GreenfootSound( "Soft Kitty.wav" );
-        soundTrack.playLoop();
-        addObject( new Flamigo(), 84, 294 );
+        //soundTrack = new GreenfootSound( "Soft Kitty.wav" );
+        //soundTrack.playLoop();
+        addObject( new Flamingo(), 84, 294 );
         addObject( new Rock(), 532, 307 );
         addObject( new Health(12), 46, 39 );
         addObject( new Health(24), 76, 39 );
@@ -37,5 +37,6 @@ public class MyWorld extends World
         addObject( new Ground(), 480, 390 );
         addObject( new Ground(), 620, 390 );
         addObject( new Red_Algae(), 700, 296 );
+        addObject( new PlayButton(), 300, 200);
     }
 }

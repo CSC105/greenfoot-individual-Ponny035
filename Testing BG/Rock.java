@@ -10,7 +10,7 @@ public class Rock extends Actor
 {
     private int speed = 5;
     private int count = 0;
-    Flamigo nok = new Flamigo();
+    Flamingo nok = new Flamingo();
     int x = 0;
     int y = 0;
     int i=0;
@@ -21,8 +21,8 @@ public class Rock extends Actor
     public void act() 
     {
         moveLeft();
-        x = ((Flamigo) getWorld().getObjects(Flamigo.class).get(0)).getX();
-        y = ((Flamigo) getWorld().getObjects(Flamigo.class).get(0)).getY();
+        x = ((Flamingo) getWorld().getObjects(Flamingo.class).get(0)).getX();
+        y = ((Flamingo) getWorld().getObjects(Flamingo.class).get(0)).getY();
         checkSpawn(getX() < -25);
     } 
     

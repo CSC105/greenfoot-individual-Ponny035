@@ -15,7 +15,7 @@ public class Red_Algae extends Actor
     private GreenfootImage image;
     private int speed = 5;
     private int count = 0;
-    Flamigo nok = new Flamigo();
+    Flamingo nok = new Flamingo();
     int x = 0;
     int y = 0;
     int i=0;

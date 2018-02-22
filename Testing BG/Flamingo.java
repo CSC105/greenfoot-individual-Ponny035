@@ -1,30 +1,31 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 /**
- * Write a description of class Flamigo here.
+ * Write a description of class Flamingo here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Flamigo extends Actor
+public class Flamingo extends Actor
 {
     /**
-     * Act - do whatever the Flamigo wants to do. This method is called whenever
+     * Act - do whatever the Flamingo wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     private Animation anime;
     private GreenfootImage image;
     private boolean isRight;
     private int direct=1;
-    private int gravity = 2;
+    private int gravity = 1;
     private int vSpeed = 0;
     private int Health = 60; // max 60
     private int count = 0;
+    //GreenfootSound  soundDead = new GreenfootSound( "Dead" );
     public int getHP () {
         return Health;
     }
     
-    public Flamigo(){
+    public Flamingo(){
       anime = new Animation( "Flamingo", 36, 50, 75 );
       setImage(anime.getFrame());
     }
@@ -37,15 +38,19 @@ public class Flamigo extends Actor
         checkEat(((Red_Algae) getWorld().getObjects(Red_Algae.class).get(0)).getX(), ((Red_Algae) getWorld().getObjects(Red_Algae.class).get(0)).getY());
         checkDamage(((Rock) getWorld().getObjects(Rock.class).get(0)).getX(), ((Rock) getWorld().getObjects(Rock.class).get(0)).getY());
         checkDead(Health);
-        Greenfoot.delay(2);
+        System.out.println(Health);
+        //setImage(anime.getDamage());
+        //Greenfoot.delay(2);
         //setImage(anime.getDamage(5));
         //Greenfoot.playSound("Soft Kitty.wav");
     } 
     public void checkDead(int HP) {
-        if(HP>12) {
+        if(HP>0) {
           setImage(anime.getFrame());  
+          //Greenfoot.playSound("Dead.wav");
         }
-        else {
+        else { //if((HP==0)&&) {
+            Greenfoot.playSound("Dead.wav");
             // dead pic
         }
     }
@@ -53,9 +58,22 @@ public class Flamigo extends Actor
     private void checkDamage(int x, int y) {
         int myX = getX();
         int myY = getY();
+        int oldHP = Health;
         if((Math.abs(x-myX)<=29)&&(Math.abs(y-myY)<=29)) {
            Health--;
            count++;
+           //setImage(anime.getDamage());
+           //Greenfoot.delay(2);
+        }
+        if(oldHP >Health&&(oldHP%12==0)) {
+           Greenfoot.playSound("Damage.wav");
+           setImage(anime.getDamage());
+           Greenfoot.delay(4);
+           setImage(anime.getFrame());
+           Greenfoot.delay(4);
+           setImage(anime.getDamage());
+           Greenfoot.delay(4);
+           setImage(anime.getFrame());
         }
     }
     
@@ -63,9 +81,17 @@ public class Flamigo extends Actor
         int myX = getX();
         int myY = getY();
         if((Math.abs(x-myX)<=29)&&(Math.abs(y-myY)<=29)) {
+           Greenfoot.playSound("Eat.wav");
            getWorld().removeObjects( (Collection)getWorld().getObjects(Red_Algae.class) );
            getWorld().addObject( new Red_Algae(), 750, 296 );
            Health+=12;
+           setImage(anime.getEat());
+           Greenfoot.delay(4);
+           setImage(anime.getFrame());
+           Greenfoot.delay(4);
+           setImage(anime.getEat());
+           Greenfoot.delay(4);
+           setImage(anime.getFrame());
            if(Health>60) {
                Health = 60;
            }
@@ -98,7 +124,7 @@ public class Flamigo extends Actor
         }
         else if (Greenfoot.isKeyDown("Space")&&onGround()) {
             Greenfoot.playSound("jump.wav");
-            vSpeed = -25;
+            vSpeed = -20;
             fall();
         }
     }  
