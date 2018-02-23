@@ -35,23 +35,31 @@ public class Flamingo extends Actor
         // Add your action code here.
         checkKeys();
         checkFall();
-        checkEat(((Red_Algae) getWorld().getObjects(Red_Algae.class).get(0)).getX(), ((Red_Algae) getWorld().getObjects(Red_Algae.class).get(0)).getY());
-        checkDamage(((Rock) getWorld().getObjects(Rock.class).get(0)).getX(), ((Rock) getWorld().getObjects(Rock.class).get(0)).getY());
+        checkPlay();
         checkDead(Health);
         System.out.println(Health);
         //setImage(anime.getDamage());
         //Greenfoot.delay(2);
         //setImage(anime.getDamage(5));
         //Greenfoot.playSound("Soft Kitty.wav");
-    } 
+    }
+    
+    private void checkPlay() {
+       List objectslookingfor = getWorld().getObjects(PlayButton.class);
+        if (objectslookingfor.size() == 0) {
+        checkEat(((Red_Algae) getWorld().getObjects(Red_Algae.class).get(0)).getX(), ((Red_Algae) getWorld().getObjects(Red_Algae.class).get(0)).getY());
+        checkDamage(((Rock) getWorld().getObjects(Rock.class).get(0)).getX(), ((Rock) getWorld().getObjects(Rock.class).get(0)).getY());
+       }
+    }
     public void checkDead(int HP) {
-        if(HP>0) {
+        if(HP>=12) {
           setImage(anime.getFrame());  
           //Greenfoot.playSound("Dead.wav");
         }
         else { //if((HP==0)&&) {
             Greenfoot.playSound("Dead.wav");
-            // dead pic
+            Greenfoot.setWorld(new MyWorld());
+            Greenfoot.stop();
         }
     }
     
@@ -81,17 +89,25 @@ public class Flamingo extends Actor
         int myX = getX();
         int myY = getY();
         if((Math.abs(x-myX)<=29)&&(Math.abs(y-myY)<=29)) {
-           Greenfoot.playSound("Eat.wav");
-           getWorld().removeObjects( (Collection)getWorld().getObjects(Red_Algae.class) );
-           getWorld().addObject( new Red_Algae(), 750, 296 );
-           Health+=12;
-           setImage(anime.getEat());
-           Greenfoot.delay(4);
-           setImage(anime.getFrame());
-           Greenfoot.delay(4);
-           setImage(anime.getEat());
-           Greenfoot.delay(4);
-           setImage(anime.getFrame());
+            Greenfoot.playSound("Eat.wav");
+            int newX=0;
+            while(newX<5000) {
+               newX=Greenfoot.getRandomNumber(20000);  
+            }
+            getWorld().removeObjects( (Collection)getWorld().getObjects(Red_Algae.class) );
+            getWorld().addObject( new Red_Algae(), newX, 296 );
+           if(Health!=60) {
+               Greenfoot.playSound("Eat.wav");
+               Health+=12;
+               setImage(anime.getEat());
+               Greenfoot.delay(4);
+               setImage(anime.getFrame());
+               Greenfoot.delay(4);
+               setImage(anime.getEat());
+               Greenfoot.delay(4);
+               setImage(anime.getFrame());
+           }
+           
            if(Health>60) {
                Health = 60;
            }

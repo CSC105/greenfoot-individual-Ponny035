@@ -50,11 +50,13 @@ public class Red_Algae extends Actor
     
     private void checkSpawn(boolean edge) {
        if(edge) {
-           getWorld().addObject( new Red_Algae(), 700, 296 );
+           int x=0;
+           x=Greenfoot.getRandomNumber(2000);
+           while(x<1000) {
+               x=Greenfoot.getRandomNumber(2000);  
+            }
+           getWorld().addObject( new Red_Algae(), x, 296 );
            getWorld().removeObject(this);
        }
-       else {
-           
-       } 
     }   
 }

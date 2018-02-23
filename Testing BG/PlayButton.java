@@ -22,14 +22,22 @@ public class PlayButton extends Actor
       //anime = new Animation( "heart", 2, 25, 25 );
       //setImage(anime.getFrame());
     }
+    
+    private void checkKeys() {
+        if (Greenfoot.isKeyDown("Space") || Greenfoot.mouseClicked(this)) {
+            isActive = false;
+        }
+    } 
+    
     public void act() 
     {
         // Add your action code here.
-        if(isActive) {
-            Greenfoot.stop();
-        }
-        else {
-            //Greenfoot.play();
+        checkKeys();
+        if(!isActive) {
+            Greenfoot.start();
+            getWorld().addObject( new Red_Algae(), 1500, 296 );
+            getWorld().addObject( new Rock(), 1000, 307 );
+            getWorld().removeObject(this);
         }
     }    
 }
