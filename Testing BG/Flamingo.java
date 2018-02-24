@@ -38,7 +38,7 @@ public class Flamingo extends Actor
         checkFall();
         checkPlay();
         checkDead(Health);
-        System.out.println(Health);
+        //System.out.println(Health);
         //setImage(anime.getDamage());
         //Greenfoot.delay(2);
         //setImage(anime.getDamage(5));
