@@ -20,6 +20,7 @@ public class Flamingo extends Actor
     private int vSpeed = 0;
     private int Health = 60; // max 60
     private int count = 0;
+    Score score = new Score();
     //GreenfootSound  soundDead = new GreenfootSound( "Dead" );
     public int getHP () {
         return Health;
@@ -52,14 +53,16 @@ public class Flamingo extends Actor
        }
     }
     public void checkDead(int HP) {
-        if(HP>=12) {
+        if(HP>0) {
           setImage(anime.getFrame());  
           //Greenfoot.playSound("Dead.wav");
         }
         else { //if((HP==0)&&) {
             Greenfoot.playSound("Dead.wav");
-            Greenfoot.setWorld(new MyWorld());
-            Greenfoot.stop();
+            Greenfoot.delay(100);
+            System.out.println(score.getScore() );
+            Greenfoot.setWorld(new End(score.getScore()));
+            //Greenfoot.stop();
         }
     }
     
@@ -111,6 +114,7 @@ public class Flamingo extends Actor
            if(Health>60) {
                Health = 60;
            }
+           score.setScore(100);
            count++;
         }
     }

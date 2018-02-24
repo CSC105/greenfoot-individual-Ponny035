@@ -37,6 +37,8 @@ public class PlayButton extends Actor
             Greenfoot.start();
             getWorld().addObject( new Red_Algae(), 1500, 296 );
             getWorld().addObject( new Rock(), 1000, 307 );
+            getWorld().removeObjects( getWorld().getObjects(SpaceToPlay.class));
+            getWorld().addObject( new Score(), 500, 39);
             getWorld().removeObject(this);
         }
     }    

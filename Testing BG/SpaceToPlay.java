@@ -16,8 +16,9 @@ public class SpaceToPlay extends Actor
     public void act() 
     {
         // Add your action code here.
+        Greenfoot.delay(5);
         setImage("SpaceToPlay.png");
-        Greenfoot.delay(2);
+        Greenfoot.delay(5);
         setImage("SpaceToPlay2.png");
     }    
 }
