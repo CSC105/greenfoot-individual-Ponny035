@@ -39,7 +39,7 @@ public class Health extends Actor
             image.scale(25,25);
             setImage( image );
         }
-        else if (hp >(health-12)) {
+        else if (hp >=(health-12)) {
            image = new GreenfootImage("heart1.png");
             image.scale(25,25);
             setImage( image ); 

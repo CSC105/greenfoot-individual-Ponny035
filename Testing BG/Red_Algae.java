@@ -59,4 +59,8 @@ public class Red_Algae extends Actor
            getWorld().removeObject(this);
        }
     }   
+    
+    public void setSpeed (int speed) {
+        this.speed = speed;
+    }
 }

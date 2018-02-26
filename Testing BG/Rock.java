@@ -9,6 +9,7 @@ import java.util.List;
 public class Rock extends Actor
 {
     private int speed = 5;
+    private boolean hit = false;
     private int count = 0;
     Flamingo nok = new Flamingo();
     int x = 0;
@@ -23,6 +24,7 @@ public class Rock extends Actor
         moveLeft();
         x = ((Flamingo) getWorld().getObjects(Flamingo.class).get(0)).getX();
         y = ((Flamingo) getWorld().getObjects(Flamingo.class).get(0)).getY();
+        setSpeed(((MyWorld)getWorld()).getSpeed ());
         checkSpawn(getX() < -25);
     } 
     
@@ -43,5 +45,16 @@ public class Rock extends Actor
            
        } 
     }
- 
+    
+    public void setHit(boolean Hit) {
+        hit = Hit;
+    }
+    
+    public boolean getHit() {
+        return hit;
+    }
+    
+    public void setSpeed (int speed) {
+        this.speed = speed;
+    }
 }

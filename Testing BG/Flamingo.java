@@ -20,6 +20,7 @@ public class Flamingo extends Actor
     private int vSpeed = 0;
     private int Health = 60; // max 60
     private int count = 0;
+    private boolean isHitting = false;
     Score score = new Score();
     //GreenfootSound  soundDead = new GreenfootSound( "Dead" );
     public int getHP () {
@@ -38,7 +39,13 @@ public class Flamingo extends Actor
         checkFall();
         checkPlay();
         checkDead(Health);
-        //System.out.println(Health);
+        score.countScore();
+        if (count == 10) {
+            ((MyWorld)getWorld()).setSpeed (1);
+            count = 0;
+        }
+        System.out.println(Health);
+        //System.out.println(((MyWorld)getWorld()).getSpeed ());
         //setImage(anime.getDamage());
         //Greenfoot.delay(2);
         //setImage(anime.getDamage(5));
@@ -53,7 +60,7 @@ public class Flamingo extends Actor
        }
     }
     public void checkDead(int HP) {
-        if(HP>0) {
+        if(HP>=12) {
           setImage(anime.getFrame());  
           //Greenfoot.playSound("Dead.wav");
         }
@@ -70,13 +77,16 @@ public class Flamingo extends Actor
         int myX = getX();
         int myY = getY();
         int oldHP = Health;
-        if((Math.abs(x-myX)<=29)&&(Math.abs(y-myY)<=29)) {
-           Health--;
+        isHitting = false ;
+        List<Rock> rocks = this.getIntersectingObjects(Rock.class);
+        Rock rock = rocks.size() > 0 ? rocks.get(0) : null;
+        if((Math.abs(x-myX)<=29)&&(Math.abs(y-myY)<=29)&& rock != null && !rock.getHit()) {
+           Health-= 12; 
            count++;
+           isHitting = true ;
+           rock.setHit(true);
            //setImage(anime.getDamage());
            //Greenfoot.delay(2);
-        }
-        if(oldHP >Health&&(oldHP%12==0)) {
            Greenfoot.playSound("Damage.wav");
            setImage(anime.getDamage());
            Greenfoot.delay(4);
@@ -142,7 +152,8 @@ public class Flamingo extends Actor
             setImage( m );
             setLocation(x+2, y);
         }
-        else if (Greenfoot.isKeyDown("Space")&&onGround()) {
+        else if (Greenfoot.isKeyDown("Space")&&onGround()&&!(isHitting)) {
+            count++;
             Greenfoot.playSound("jump.wav");
             vSpeed = -20;
             fall();

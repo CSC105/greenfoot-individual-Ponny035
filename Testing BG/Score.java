@@ -31,17 +31,20 @@ public class Score extends Actor
        }
     }
     public void setScore() {
-        if(count>=10) {
+        //if(count>=10) {
             score++;
             count = 0;
-        }
-        else {
-            count++;
-        }
+        //}
+        //else {
+        //}
     }
     
     public int getScore() {
         return score;
+    }
+    
+    public void countScore() {
+        setScore();
     }
     
     public void setScore(int x) {

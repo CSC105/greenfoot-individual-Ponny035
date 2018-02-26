@@ -16,6 +16,7 @@ public class MyWorld extends World
      * Constructor for objects of class MyWorld.
      * 
      */
+    int speed = 5;
     private GreenfootSound soundTrack;
     public MyWorld()
     {    
@@ -37,5 +38,13 @@ public class MyWorld extends World
         addObject( new PlayButton(), 300, 200);
         addObject( new SpaceToPlay(), 300, 365);
         Greenfoot.start();
+        
+    }
+    public void setSpeed (int speed) {
+        this.speed = this.speed+speed;
+    }
+    
+    public int getSpeed () {
+        return speed;
     }
 }
