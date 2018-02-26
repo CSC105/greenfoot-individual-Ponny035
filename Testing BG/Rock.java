@@ -1,31 +1,27 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*; 
 import java.util.List;
 /**
  * Write a description of class Rock here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patipol Saechan 
+ * @version 1.0
  */
 public class Rock extends Actor
 {
+    Flamingo nok = new Flamingo();
     private int speed = 5;
     private boolean hit = false;
     private int count = 0;
-    Flamingo nok = new Flamingo();
     int x = 0;
     int y = 0;
-    int i=0;
-    /**
-     * Act - do whatever the Rock wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+    
     public void act() 
     {
         moveLeft();
         x = ((Flamingo) getWorld().getObjects(Flamingo.class).get(0)).getX();
         y = ((Flamingo) getWorld().getObjects(Flamingo.class).get(0)).getY();
         setSpeed(((MyWorld)getWorld()).getSpeed ());
-        checkSpawn(getX() < -25);
+        checkSpawn(getX() < (-25));
     } 
     
     private void moveLeft() {
@@ -38,7 +34,12 @@ public class Rock extends Actor
     
     private void checkSpawn(boolean edge) {
        if(edge) {
-           getWorld().addObject( new Rock(), 600, 307 );
+           x=0;
+           x=Greenfoot.getRandomNumber(2000);
+           while(x<1000) {
+               x=Greenfoot.getRandomNumber(2000);  
+            }
+           getWorld().addObject( new Rock(), x, 307 );
            getWorld().removeObject(this);
        }
        else {
