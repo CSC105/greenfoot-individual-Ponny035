@@ -1,37 +1,35 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*; 
 
 /**
- * Write a description of class Replay here.
+ * Write a description of class Ground here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patipol Saechan 
+ * @version 1.0
  */
 public class Replay extends Actor
 {
+    private GreenfootSound soundTrack;
     private GreenfootImage image;
     private boolean isActive = true;
-    /**
-     * Act - do whatever the Replay wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+
      public Replay() {
          image = new GreenfootImage("replay.png");
          image.scale(100,100);
          setImage( image );
-      //anime = new Animation( "heart", 2, 25, 25 );
-      //setImage(anime.getFrame());
     }
+    
     private void checkKeys() {
         if (Greenfoot.isKeyDown("Space") || Greenfoot.mouseClicked(this)) {
             isActive = false;
         }
     }
+    
     public void act() 
     {
        checkKeys();
        if(!isActive) {
             Greenfoot.start();
-            Greenfoot.setWorld(new MyWorld());
+            Greenfoot.setWorld(new Start());
             getWorld().removeObject(this);
         }
     }    

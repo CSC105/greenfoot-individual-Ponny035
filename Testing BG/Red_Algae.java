@@ -1,47 +1,34 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;  
 
 /**
- * Write a description of class Red_Algae here.
+ * Write a description of class Ground here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patipol Saechan 
+ * @version 1.0
  */
 public class Red_Algae extends Actor
 {
-    /**
-     * Act - do whatever the Red_Algae wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
     private GreenfootImage image;
     private int speed = 5;
     private int count = 0;
-    Flamingo nok = new Flamingo();
     int x = 0;
     int y = 0;
-    int i=0;
     
     public Red_Algae(){
-      image = new GreenfootImage("Red_Algae.png");
-      image.scale(100,100);
-      setImage( image );
-      //anime = new Animation( "heart", 2, 25, 25 );
-      //setImage(anime.getFrame());
+        image = new GreenfootImage("Red_Algae.png");
+        image.scale(100,100);
+        setImage( image );
     }
  
     public void act() 
     {
-        // Add your action code here.
+        setSpeed(((MyWorld)getWorld()).getSpeed ());
         moveLeft();
-        //damage(x,y);
         checkSpawn(getX() < -25);
     } 
     
     private void moveLeft() {
         setLocation(getX()-speed, getY());
-        /*if(damage()) {
-            damage++;
-            System.out.println("np"+damage);
-        }*/
         if(count == 10) {
             speed++;
             count = 0 ;
@@ -49,18 +36,19 @@ public class Red_Algae extends Actor
     }
     
     private void checkSpawn(boolean edge) {
-       if(edge) {
-           int x=0;
-           x=Greenfoot.getRandomNumber(2000);
-           while(x<1000) {
-               x=Greenfoot.getRandomNumber(2000);  
+        if(edge) {
+            int x=0;
+            x=Greenfoot.getRandomNumber(2000);
+            while(x<1000) {
+                x=Greenfoot.getRandomNumber(2000);  
             }
-           getWorld().addObject( new Red_Algae(), x, 296 );
-           getWorld().removeObject(this);
-       }
+            getWorld().addObject( new Red_Algae(), x, 296 );
+            getWorld().removeObject(this);
+        }
     }   
     
     public void setSpeed (int speed) {
         this.speed = speed;
     }
+
 }

@@ -1,21 +1,16 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
+import greenfoot.*;  
 /**
- * Write a description of class SpaceToPlay here.
+ * Write a description of class Ground here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patipol Saechan 
+ * @version 1.0
  */
 public class SpaceToPlay extends Actor
 {
-    /**
-     * Act - do whatever the SpaceToPlay wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
     private GreenfootImage image;
+    
     public void act() 
     {
-        // Add your action code here.
         Greenfoot.delay(5);
         setImage("SpaceToPlay.png");
         Greenfoot.delay(5);

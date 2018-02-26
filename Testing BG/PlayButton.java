@@ -1,17 +1,12 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
+import greenfoot.*; 
 /**
- * Write a description of class PlayButton here.
+ * Write a description of class Ground here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Patipol Saechan 
+ * @version 1.0
  */
 public class PlayButton extends Actor
 {
-    /**
-     * Act - do whatever the PlayButton wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
     private GreenfootImage image;
     private boolean isActive = true;
     
@@ -19,8 +14,6 @@ public class PlayButton extends Actor
       image = new GreenfootImage("play.png");
       image.scale(150,150);
       setImage( image );
-      //anime = new Animation( "heart", 2, 25, 25 );
-      //setImage(anime.getFrame());
     }
     
     private void checkKeys() {
@@ -31,13 +24,13 @@ public class PlayButton extends Actor
     
     public void act() 
     {
-        // Add your action code here.
         checkKeys();
         if(!isActive) {
             Greenfoot.start();
             getWorld().addObject( new Red_Algae(), 1500, 296 );
             getWorld().addObject( new Rock(), 1000, 307 );
             getWorld().removeObjects( getWorld().getObjects(SpaceToPlay.class));
+            getWorld().addObject( new Rock(), 2000, 307 );
             getWorld().addObject( new Score(), 500, 39);
             getWorld().removeObject(this);
         }
