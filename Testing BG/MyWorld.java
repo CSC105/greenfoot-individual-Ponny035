@@ -1,4 +1,4 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
  * Write a description of class MyWorld here.
@@ -16,10 +16,14 @@ public class MyWorld extends World
     //private GreenfootSound soundTrack;
     int speed = 5;
     int score = 0;
-    int CSCORE = 0;
+    int CSCORE;
+    static int MODE;
+    static int HIGHSCORE1 = 0;
+    static int HIGHSCORE2 = 0;
+    static int HIGHSCORE3 = 0;
     private int count = 0;
     
-    public MyWorld( int health,int  speed ) {
+    public MyWorld( int health,int  speed) {
         super(600, 400, 1, false);
         this.speed = speed;
         int x=16;
@@ -38,13 +42,34 @@ public class MyWorld extends World
         switch (health) {
             case 12: 
                 CSCORE = 40;
+                MODE = 1;
                 break;
             case 36: 
                 CSCORE = 50;
+                MODE = 2;
                 break;
             case 60: 
                 CSCORE = 100;
+                MODE = 3;
                 break;
+        }
+    }
+    
+    public void setHigh3 (int x) {
+        if(x>=HIGHSCORE3) {
+            HIGHSCORE3 = x;
+        }
+    }
+    
+    public void setHigh2 (int x) {
+        if(x>=HIGHSCORE2) {
+            HIGHSCORE2 = x;
+        }
+    }
+    
+    public void setHigh1 (int x) {
+        if(x>=HIGHSCORE1) {
+            HIGHSCORE1 = x;
         }
     }
     
