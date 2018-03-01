@@ -17,7 +17,7 @@ public class Hard extends level
         super.checkKeys();
         if(!isActive) {
             Greenfoot.start();
-            Greenfoot.setWorld(new MyWorld(12));
+            Greenfoot.setWorld(new MyWorld(12,10));
             getWorld().removeObject(this);
         }
     }    

@@ -19,8 +19,9 @@ public class MyWorld extends World
     int CSCORE = 0;
     private int count = 0;
     
-    public MyWorld( int health) {
+    public MyWorld( int health,int  speed ) {
         super(600, 400, 1, false);
+        this.speed = speed;
         int x=16;
         addObject( new BackGroud(), 0, 130 );
         addObject( new BackGroud(), 1006, 130 );

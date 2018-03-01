@@ -17,7 +17,7 @@ public class mid extends level
        super.checkKeys();
        if(!isActive) {
             Greenfoot.start();
-            Greenfoot.setWorld(new MyWorld(36));
+            Greenfoot.setWorld(new MyWorld(36,8));
             getWorld().removeObject(this);
         }
     }    

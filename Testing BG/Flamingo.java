@@ -12,11 +12,15 @@ public class Flamingo extends Actor
     private Animation anime;
     private GreenfootImage image;
     private boolean isHitting = false;
+    private boolean isCheating = false;
+    private boolean spacePressed = false;
     private int gravity = 1;
     private int vSpeed = 0;
     private int maxHealth = 60;
     private int Health = 60; // max 60
     private int count = 0;
+    private int countJump = 2;
+    
     
     public Flamingo(){
       anime = new Animation( "Flamingo", 36, 50, 75 );
@@ -36,6 +40,7 @@ public class Flamingo extends Actor
     public void act() 
     {
         checkKeys();
+        onGround();
         checkFall();
         checkPlay();
         checkDead(Health);
@@ -44,6 +49,7 @@ public class Flamingo extends Actor
             ((MyWorld)getWorld()).setSpeed (1);
             count = 0;
         }
+        cheating(isCheating);
     }
     
     public int getHP() {
@@ -81,7 +87,9 @@ public class Flamingo extends Actor
             Health -= 12; 
             isHitting = true ;
             rock.setHit(true);
-            Greenfoot.playSound("Damage.wav");
+            GreenfootSound sound = new GreenfootSound("Damage.wav");
+            sound.setVolume(25);
+            sound.play();
             setImage(anime.getDamage());
             Greenfoot.delay(4);
             setImage(anime.getFrame());
@@ -96,7 +104,9 @@ public class Flamingo extends Actor
         int myX = getX();
         int myY = getY();
         if((Math.abs(x-myX) <= 29) && (Math.abs(y-myY) <= 29)) {
-            Greenfoot.playSound("Eat.wav");
+            GreenfootSound sound = new GreenfootSound("Eat.wav");
+            sound.setVolume(50);
+            sound.play();
             int newX = 0;
             while(newX < 5000) {
                 newX = Greenfoot.getRandomNumber(20000);  
@@ -125,7 +135,9 @@ public class Flamingo extends Actor
         int myX = getX();
         int myY = getY();
         if((Math.abs(x-myX) <= 29) && (Math.abs(y-myY) <= 29)) {
-           Greenfoot.playSound("Coin.wav");
+           GreenfootSound sound = new GreenfootSound("Coin.wav");
+           sound.setVolume(80);
+           sound.play();
            int newX = 0;
            while(newX < 5000) {
                newX = Greenfoot.getRandomNumber(10000);  
@@ -136,24 +148,57 @@ public class Flamingo extends Actor
         }
     }
     
+    private void countJump() {
+            countJump--;
+    }
+
     private void checkKeys() {
         int x = getX();
         int y = getY();
         GreenfootImage m = new GreenfootImage(anime.getFrame());
-        if (Greenfoot.isKeyDown("Space") && onGround() && !(isHitting)) {
-            count++;
-            Greenfoot.playSound("jump.wav");
-            vSpeed = -20;
+        if (Greenfoot.isKeyDown("Space") && !(isHitting) && (countJump>0)) {
+            if (!spacePressed) {
+                count++;
+                GreenfootSound sound = new GreenfootSound("jump.wav");
+                sound.setVolume(75);
+                sound.play();
+                if(countJump==2) {
+                    vSpeed = -20;
+                }
+                else {
+                    vSpeed = -15;
+                }
+                countJump();
+                spacePressed = true;
+            }
             fall();
+        }
+        else {
+            spacePressed = false;
         }
     }  
     
+    private void cheating (boolean x) {
+        if (Greenfoot.isKeyDown("c")) {
+            isCheating = true;
+        }
+        if (Greenfoot.isKeyDown("v")) {
+            isCheating = false;
+        }
+        if(x) {
+            ((MyWorld)getWorld()).setScore (50);
+        }
+    }
+    
     private boolean onGround() {
         Actor under = getOneObjectAtOffset (0, 37, Ground.class);
+        if(under != null) {
+            countJump =2;
+        }
         return under != null;
     }
 
-    private void checkFall() {
+    private void checkFall(   ) {
         if(onGround()) {
             vSpeed = 0;
             setLocation(getX(), 294);
@@ -164,7 +209,10 @@ public class Flamingo extends Actor
     }
     
     private void fall() {
+        if(getY()<=48) {
+            vSpeed=1;
+        }
         setLocation(getX(), getY()+vSpeed);
         vSpeed = vSpeed + gravity;
-    }
+    } 
 }

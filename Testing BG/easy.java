@@ -17,7 +17,7 @@ public class easy extends level
        super.checkKeys();
        if(!isActive) {
             Greenfoot.start();
-            Greenfoot.setWorld(new MyWorld(60));
+            Greenfoot.setWorld(new MyWorld(60,5));
             getWorld().removeObject(this);
         }
     }    
