@@ -21,7 +21,6 @@ public class Flamingo extends Actor
     private int count = 0;
     private int countJump = 2;
     
-    
     public Flamingo(){
       anime = new Animation( "Flamingo", 36, 50, 75 );
       setImage(anime.getFrame());
@@ -40,16 +39,30 @@ public class Flamingo extends Actor
     public void act() 
     {
         checkKeys();
-        onGround();
         checkFall();
         checkPlay();
         checkDead(Health);
         ((MyWorld)getWorld()).setScore ();
+        setHigh();
         if (count == 10) {
             ((MyWorld)getWorld()).setSpeed (1);
             count = 0;
         }
         cheating(isCheating);
+    }
+    
+    public void setHigh() {
+        switch (MyWorld.MODE) {
+            case 1: ;
+                ((MyWorld)getWorld()).setHigh1(((MyWorld)getWorld()).getScore ());
+                break;
+            case 2: 
+                ((MyWorld)getWorld()).setHigh2(((MyWorld)getWorld()).getScore ());
+                break;
+            case 3: 
+                ((MyWorld)getWorld()).setHigh3(((MyWorld)getWorld()).getScore ());
+                break;
+        }
     }
     
     public int getHP() {
@@ -73,6 +86,7 @@ public class Flamingo extends Actor
             soundTrack.stop();
             Greenfoot.playSound("Dead.wav");
             Greenfoot.delay(100);
+            setHigh();
             Greenfoot.setWorld( new End(((MyWorld)getWorld()).getScore()));
         }
     }

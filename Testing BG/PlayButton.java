@@ -31,7 +31,8 @@ public class PlayButton extends Actor
             getWorld().addObject( new Rock(), 1000, 307 );
             getWorld().removeObjects( getWorld().getObjects(SpaceToPlay.class));
             getWorld().addObject( new Rock(), 2000, 307 );
-            getWorld().addObject( new Score(), 450, 39);
+            getWorld().addObject( new HighScore(), 450, 39);
+            getWorld().addObject( new Score(), 450, 69);
             getWorld().addObject( new Coin(), 2500, 300);
             getWorld().removeObject(this);
         }
