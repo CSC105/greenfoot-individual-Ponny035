@@ -18,6 +18,7 @@ public class level extends Actor
         image = new GreenfootImage(img);
         image.scale(100,100);
         setImage( image );
+
     }
     
     public void act() 
@@ -28,6 +29,7 @@ public class level extends Actor
     public void checkKeys() {
         if (Greenfoot.mouseClicked(this)) {
             isActive = false;
+            //(getWorld().getObjects(Mode.class)).setActive(false);
         }
     } 
     

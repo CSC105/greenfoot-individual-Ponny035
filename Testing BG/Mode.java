@@ -8,8 +8,21 @@ import greenfoot.*;
  */
 public class Mode extends Actor
 {
+    private GreenfootSound soundTrack;
+    boolean isActive = true;
+    public Mode () {
+        //soundTrack = new GreenfootSound( "Mawin.wav" );
+        //soundTrack.playLoop();
+    }
+
     public void act() 
     {
-        // Add your action code here.
-    }    
+       if(!isActive) {
+           soundTrack.stop();
+       }
+    }  
+    
+    public void setActive (boolean a) {
+        isActive = a;
+    }
 }

@@ -14,7 +14,7 @@ public class mid extends level
     
     public void act() 
     {
-        super.checkKeys();
+       super.checkKeys();
        if(!isActive) {
             Greenfoot.start();
             Greenfoot.setWorld(new MyWorld(36));

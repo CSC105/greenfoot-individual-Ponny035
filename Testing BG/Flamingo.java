@@ -17,7 +17,6 @@ public class Flamingo extends Actor
     private int maxHealth = 60;
     private int Health = 60; // max 60
     private int count = 0;
-    Score score = new Score();
     
     public Flamingo(){
       anime = new Animation( "Flamingo", 36, 50, 75 );
@@ -31,6 +30,7 @@ public class Flamingo extends Actor
       setImage(anime.getFrame());
       soundTrack = new GreenfootSound( "Soft Kitty.wav" );
       soundTrack.playLoop();
+      soundTrack.setVolume(50);
     }
     
     public void act() 
@@ -39,7 +39,7 @@ public class Flamingo extends Actor
         checkFall();
         checkPlay();
         checkDead(Health);
-        score.countScore();
+        ((MyWorld)getWorld()).setScore ();
         if (count == 10) {
             ((MyWorld)getWorld()).setSpeed (1);
             count = 0;
@@ -54,6 +54,7 @@ public class Flamingo extends Actor
        List objectslookingfor = getWorld().getObjects(PlayButton.class);
        if (objectslookingfor.size() == 0) {
            checkEat(((Red_Algae) getWorld().getObjects(Red_Algae.class).get(0)).getX(), ((Red_Algae) getWorld().getObjects(Red_Algae.class).get(0)).getY());
+           checkCoin(((Coin) getWorld().getObjects(Coin.class).get(0)).getX(), ((Coin) getWorld().getObjects(Coin.class).get(0)).getY());
            checkDamage(((Rock) getWorld().getObjects(Rock.class).get(0)).getX(), ((Rock) getWorld().getObjects(Rock.class).get(0)).getY());
        }
     }
@@ -66,8 +67,7 @@ public class Flamingo extends Actor
             soundTrack.stop();
             Greenfoot.playSound("Dead.wav");
             Greenfoot.delay(100);
-            System.out.println(score.getScore() );
-            Greenfoot.setWorld( new End(score.getScore()));
+            Greenfoot.setWorld( new End(((MyWorld)getWorld()).getScore()));
         }
     }
     
@@ -79,7 +79,6 @@ public class Flamingo extends Actor
         Rock rock = rocks.size() > 0 ? rocks.get(0) : null;
         if((Math.abs(x-myX)<=29) && (Math.abs(y-myY)<=29) && rock != null && !rock.getHit()) {
             Health -= 12; 
-            count++;
             isHitting = true ;
             rock.setHit(true);
             Greenfoot.playSound("Damage.wav");
@@ -105,7 +104,6 @@ public class Flamingo extends Actor
             getWorld().removeObjects( (Collection)getWorld().getObjects(Red_Algae.class) );
             getWorld().addObject( new Red_Algae(), newX, 296 );
             if(Health != maxHealth) {
-                Greenfoot.playSound("Eat.wav");
                 Health += 12;
                 setImage(anime.getEat());
                 Greenfoot.delay(4);
@@ -119,8 +117,22 @@ public class Flamingo extends Actor
             if(Health > 60) {
                 Health = 60;
             }
-            score.setScore(100);
-            count++;
+            ((MyWorld)getWorld()).setScore (25);
+        }
+    }
+    
+    private void checkCoin(int x, int y) {
+        int myX = getX();
+        int myY = getY();
+        if((Math.abs(x-myX) <= 29) && (Math.abs(y-myY) <= 29)) {
+           Greenfoot.playSound("Coin.wav");
+           int newX = 0;
+           while(newX < 5000) {
+               newX = Greenfoot.getRandomNumber(10000);  
+           }
+           getWorld().removeObjects( (Collection)getWorld().getObjects(Coin.class) );
+           getWorld().addObject( new Coin(), newX, 296 );
+           ((MyWorld)getWorld()).setScore (50);
         }
     }
     
@@ -137,7 +149,7 @@ public class Flamingo extends Actor
     }  
     
     private boolean onGround() {
-        Actor under = getOneObjectAtOffset (0, 45, Ground.class);
+        Actor under = getOneObjectAtOffset (0, 37, Ground.class);
         return under != null;
     }
 

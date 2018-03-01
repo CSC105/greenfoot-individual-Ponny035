@@ -19,8 +19,9 @@ public class Replay extends Actor
     }
     
     private void checkKeys() {
-        if (Greenfoot.isKeyDown("Space") || Greenfoot.mouseClicked(this)) {
+        if (Greenfoot.mouseClicked(this)) {
             isActive = false;
+            
         }
     }
     
