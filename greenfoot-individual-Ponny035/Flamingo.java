@@ -35,9 +35,9 @@ public class Flamingo extends Actor
     {
         checkKeys();
         checkFall();
-        setHigh();
         checkDead(health);
         checkPlay();
+        setHigh();
         ((MyWorld)getWorld()).setScore ();
         setSpeed();
         cheating(isCheating);
@@ -83,6 +83,7 @@ public class Flamingo extends Actor
         }
         else {
             soundTrack.stop();
+            setHigh();
             Greenfoot.playSound("Dead.wav");
             Greenfoot.delay(100);
             Greenfoot.setWorld( new End(((MyWorld)getWorld()).getScore()));
