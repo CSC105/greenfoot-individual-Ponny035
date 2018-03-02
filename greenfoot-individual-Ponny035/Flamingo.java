@@ -93,7 +93,7 @@ public class Flamingo extends Actor
         isHitting = false ;
         List<Rock> rocks = this.getIntersectingObjects(Rock.class);
         Rock rock = rocks.size() > 0 ? rocks.get(0) : null;
-        if(isTouching(Rock.class)) {
+        if(isTouching(Rock.class)&& rock != null && !rock.getHit()) {
             health -= 12; 
             isHitting = true ;
             rock.setHit(true);
